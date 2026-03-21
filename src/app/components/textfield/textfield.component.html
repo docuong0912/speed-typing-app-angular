@@ -1,0 +1,11 @@
+<div>
+    @for(char of text; track $index) {
+    <span [class.text-[var(--neutral-400)]]="!isActive($index)" [class.bg-[var(--neutral-400)]]="isActive($index)"
+        [class.text-green-500]="this.checked[$index] && $index < currentIndex()"
+        [class.text-red-500]="!this.checked[$index] && $index < currentIndex()">
+        {{
+        char
+        }}</span>
+    }
+
+</div>
