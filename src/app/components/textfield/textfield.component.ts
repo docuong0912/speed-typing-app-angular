@@ -2,13 +2,12 @@ import { AfterViewInit, Component, ElementRef, Host, HostListener, input, signal
 
 @Component({
     selector: "app-textfield",
-    templateUrl: "./textfield.component.html"
+    templateUrl: "./textfield.component.html",
+    styleUrl: "./textfield.component.css"
 })
 export class TextfieldComponent {
-    @ViewChild("textElement") textElement!: ElementRef<SVGTextElement>;
-
     step = 0;
-    text = "The quick brown fox jumps over the lazy dog.";
+    text = "The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog.The quick brown fox jumps over the lazy dog";
     checked: boolean[] = [];
 
     isActive(index: number): boolean {
