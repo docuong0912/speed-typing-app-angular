@@ -1,4 +1,4 @@
-<div style="font-size: 0;">
+<div>
     @for(char of text; track $index) {
     <span [class.text-pointer]="isActive($index)"
         [class.text-green-500]="this.checked[$index] && $index < currentIndex()"
@@ -9,6 +9,6 @@
     @if(char === ' ')
     {
     <span [class.text-pointer]="isActive($index)"
-        [class.bg-[var(--red-500)]]="!this.checked[$index] && $index < currentIndex()" class="text-lg">&nbsp;</span>}
+        [class.bg-[var(--red-500)]]="!this.checked[$index] && $index < currentIndex()" class="text-lg ">&nbsp;</span>}
     }
 </div>
