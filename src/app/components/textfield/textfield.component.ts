@@ -7,7 +7,7 @@ import { AfterViewInit, Component, ElementRef, Host, HostListener, input, signal
 })
 export class TextfieldComponent {
     step = 0;
-    text = "The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog.The quick brown fox jumps over the lazy dog";
+    text = `The quick brown "fox" 'jumps' over the lazy dog. `;
     checked: boolean[] = [];
 
     isActive(index: number): boolean {
@@ -29,7 +29,11 @@ export class TextfieldComponent {
     @HostListener("window:keydown", ["$event"])
     setCursor(event: KeyboardEvent): void {
         this.validateCharacter(event.key);
+        if (event.shiftKey) {
+            if (event.key === "Shift") {
+                return;
+            }
+        }
         this.step++;
-        console.log(event.key);
     }
 }
