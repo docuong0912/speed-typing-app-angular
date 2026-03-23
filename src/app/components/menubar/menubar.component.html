@@ -1,0 +1,44 @@
+<div class="text-neutral-400 flex justify-between p-2">
+
+    <!-- LEFT: Stats -->
+    <div class="flex text-neutral-500">
+        @for (stat of stats; track stat.label; let last = $last) {
+        <div class="flex items-center pr-4 mr-4" [class.border-r]="!last" [class.border-neutral-800]="!last">
+            <span class="text-sm">
+                {{ stat.label }}: {{ stat.value }}
+            </span>
+        </div>
+        }
+    </div>
+
+    <!-- RIGHT: Controls -->
+    <div class="flex items-center gap-6">
+
+        <!-- Difficulty -->
+        <div class="flex items-center">
+            <span class="text-xs">Difficulty:</span>
+            <div class="ml-2 flex gap-2">
+                @for (level of difficulties; track level) {
+                <span (click)="selectDifficulty(level)" class="p-1 border text-sm rounded-lg cursor-pointer"
+                    [class.active-menu-button]="level === selectedDifficulty">
+                    {{ level }}
+                </span>
+                }
+            </div>
+        </div>
+
+        <!-- Mode -->
+        <div class="flex items-center">
+            <span class="text-xs">Mode:</span>
+            <div class="ml-2 flex gap-2">
+                @for (mode of modes; track mode) {
+                <span (click)="selectMode(mode)" class="p-1 border text-sm rounded-lg cursor-pointer"
+                    [class.active-menu-button]="mode === selectedMode">
+                    {{ mode }}
+                </span>
+                }
+            </div>
+        </div>
+
+    </div>
+</div>

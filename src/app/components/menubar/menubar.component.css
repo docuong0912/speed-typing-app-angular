@@ -1,0 +1,4 @@
+.active-menu-button {
+    color: var(--blue-600);
+    border-color: var(--blue-600);
+}
