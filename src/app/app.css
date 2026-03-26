@@ -11,4 +11,11 @@
     width: 100vw;
     height: 100vh;
     background-color: hsl(0, 0%, 7%);
+    padding: 3rem;
+}
+
+main>* {
+    border-bottom: 1px solid var(--neutral-800);
+    padding-bottom: 20px;
+    margin-top: 40px;
 }
