@@ -1,4 +1,6 @@
-import { Component } from "@angular/core";
+import { Component, computed, inject, model } from "@angular/core";
+import { TimerService } from "../../services/timer.service";
+import { CoreService } from "../../services/core.service";
 
 @Component({
     selector: "app-menubar",
@@ -6,23 +8,49 @@ import { Component } from "@angular/core";
     styleUrl: "./menubar.component.css"
 })
 export class MenubarComponent {
-    stats = [
-        { label: 'WPM', value: 40 },
-        { label: 'Accuracy', value: '90%' },
-        { label: 'Time', value: '00:30' }
-    ];
+
+    private timer = inject(TimerService);
+    private coreService = inject(CoreService);
+    private minute = computed(() => this.timer.minute() < 10 ? '0' + this.timer.minute() : this.timer.minute());
+    private second = computed(() => this.timer.second() < 10 ? '0' + this.timer.second() : this.timer.second());
+
+
+    stats = computed(() => [
+        { label: 'WPM', value: this.coreService.wpm() },
+        { label: 'Accuracy', value: this.coreService.accuracy() + '%' },
+        { label: 'Time', value: this.minute() + ':' + this.second() }
+    ]);
 
     difficulties = ['Easy', 'Medium', 'Hard'];
     modes = ['Time', 'Passage'];
-
-    selectedDifficulty = 'Easy';
+    selectedDifficultyIndex = model<number>(0);
+    selectedDifficulty: string = 'Easy';
     selectedMode = 'Time';
-
-    selectDifficulty(difficulty: string): void {
-        this.selectedDifficulty = difficulty;
+    selectedPassage = model(this.selectedDifficulty.toLowerCase());
+    selectDifficulty(index: number): void {
+        if (this.timer.hasStarted()) {
+            return;
+        }
+        this.selectedDifficulty = this.difficulties[index];
+        this.selectedDifficultyIndex.set(index);
     }
 
     selectMode(mode: string): void {
+        if (this.timer.hasStarted()) {
+            return;
+        }
         this.selectedMode = mode;
+    }
+    leftMenuClass(index: number): string {
+        if (index === 1) {
+            if (this.coreService.isAccurate()) {
+                return 'text-green-500';
+            }
+            return 'text-red-500';
+        }
+        else if (index === 2) {
+            return 'text-yellow-400';
+        }
+        return 'text-white';
     }
 }
