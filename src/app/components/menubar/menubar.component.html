@@ -1,11 +1,12 @@
-<div class="text-neutral-400 flex justify-between p-2">
+<div class="text-neutral-400 flex justify-between ">
 
     <!-- LEFT: Stats -->
     <div class="flex text-neutral-500">
-        @for (stat of stats; track stat.label; let last = $last) {
+        @for (stat of stats(); track stat.label; let last = $last) {
         <div class="flex items-center pr-4 mr-4" [class.border-r]="!last" [class.border-neutral-800]="!last">
             <span class="text-sm">
-                {{ stat.label }}: {{ stat.value }}
+                {{ stat.label }}: <span [class]="leftMenuClass($index)" class="text-lg font-bold">{{ stat.value
+                    }}</span>
             </span>
         </div>
         }
@@ -19,7 +20,7 @@
             <span class="text-xs">Difficulty:</span>
             <div class="ml-2 flex gap-2">
                 @for (level of difficulties; track level) {
-                <span (click)="selectDifficulty(level)" class="p-1 border text-sm rounded-lg cursor-pointer"
+                <span (click)="selectDifficulty($index)" class="p-1 border text-sm rounded-lg cursor-pointer"
                     [class.active-menu-button]="level === selectedDifficulty">
                     {{ level }}
                 </span>
