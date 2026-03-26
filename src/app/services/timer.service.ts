@@ -9,7 +9,7 @@ export class TimerService {
     readonly minute = this._minute.asReadonly();
     startTimer(): void {
         this.stopTimer();
-
+        this._second.update(v => v + 1);
         this.timerId = setInterval(() => {
             this._second.update((v) => v + 1);
             if (this._second() === 60) {
@@ -22,10 +22,16 @@ export class TimerService {
     stopTimer(): void {
         if (this.timerId) {
             clearInterval(this.timerId);
+            this.timerId = null;
         }
     }
 
     hasStarted(): boolean {
         return this.timerId !== null;
+    }
+    resetTimer(): void {
+        this.stopTimer();
+        this._second.set(0);
+        this._minute.set(0);
     }
 }
