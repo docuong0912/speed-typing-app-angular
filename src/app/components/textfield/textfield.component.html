@@ -1,9 +1,9 @@
 <div>
-    @for(char of text; track $index) {
+    @for(char of selectedPassage(); track $index) {
     <span [class.text-pointer]="isActive($index)"
         [class.text-green-500]="this.checked[$index] && $index < currentIndex()"
         [class.invalid-text]="!this.checked[$index] && $index < currentIndex()"
-        class="text-[var(--neutral-400)] text-lg font-stretch-extra-condensed tracking-[-0.1em] font-medium">
+        class="whitespace-nowrap text-[var(--neutral-400)] text-xl font-stretch-extra-condensed tracking-[-0.1em] ">
         {{ char}}
     </span>
     @if(char === ' ')
