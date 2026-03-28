@@ -22,5 +22,6 @@ export class App {
     let passageIndex = Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
     return data[index === 0 ? 'easy' : index === 1 ? 'medium' : 'hard'][passageIndex].text;
   });
+  selectedModeIndex = signal(0);
 
 }

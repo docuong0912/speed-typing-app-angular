@@ -1,9 +1,9 @@
 <main class="main">
   <div>
-    <app-menubar [(selectedDifficultyIndex)]="selectedDifficultyIndex" />
+    <app-menubar [(selectedDifficultyIndex)]="selectedDifficultyIndex" [(selectedModeIndex)]="selectedModeIndex" />
   </div>
   <div>
-    <app-textfield [selectedPassage]="selectedPassage()" />
+    <app-textfield [selectedPassage]="selectedPassage()" [selectedModeIndex]="selectedModeIndex()" />
   </div>
 
 </main>
