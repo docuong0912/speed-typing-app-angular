@@ -1,4 +1,4 @@
-import { Component, computed, inject, model } from "@angular/core";
+import { Component, computed, inject, model, OnInit, SimpleChanges } from "@angular/core";
 import { TimerService } from "../../services/timer.service";
 import { CoreService } from "../../services/core.service";
 
@@ -7,13 +7,21 @@ import { CoreService } from "../../services/core.service";
     templateUrl: "./menubar.component.html",
     styleUrl: "./menubar.component.css"
 })
-export class MenubarComponent {
+export class MenubarComponent implements OnInit {
 
+    selectedModeIndex = model<number>(0);
     private timer = inject(TimerService);
     private coreService = inject(CoreService);
     private minute = computed(() => this.timer.minute() < 10 ? '0' + this.timer.minute() : this.timer.minute());
     private second = computed(() => this.timer.second() < 10 ? '0' + this.timer.second() : this.timer.second());
-
+    ngOnInit(): void {
+        this.timer.initiateTimer(this.selectedModeIndex() === 0);
+    }
+    ngOnChanges(changes: SimpleChanges<MenubarComponent>): void {
+        if (changes.selectedModeIndex) {
+            this.timer.initiateTimer(this.selectedModeIndex() === 0);
+        }
+    }
 
     stats = computed(() => [
         { label: 'WPM', value: this.coreService.wpm() },
@@ -35,11 +43,12 @@ export class MenubarComponent {
         this.selectedDifficultyIndex.set(index);
     }
 
-    selectMode(mode: string): void {
+    selectMode(index: number): void {
         if (this.timer.hasStarted()) {
             return;
         }
-        this.selectedMode = mode;
+        this.selectedMode = this.modes[index];
+        this.selectedModeIndex.set(index);
     }
     leftMenuClass(index: number): string {
         if (index === 1) {

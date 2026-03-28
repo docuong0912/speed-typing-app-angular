@@ -33,7 +33,7 @@
             <span class="text-xs">Mode:</span>
             <div class="ml-2 flex gap-2">
                 @for (mode of modes; track mode) {
-                <span (click)="selectMode(mode)" class="p-1 border text-sm rounded-lg cursor-pointer"
+                <span (click)="selectMode($index)" class="p-1 border text-sm rounded-lg cursor-pointer"
                     [class.active-menu-button]="mode === selectedMode">
                     {{ mode }}
                 </span>
