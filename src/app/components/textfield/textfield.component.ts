@@ -15,6 +15,7 @@ export class TextfieldComponent {
     startIndex = 0;
     errorCount = 0;
     selectedPassage = input<string>('');
+    selectedModeIndex = input<number>(0);
     checked: boolean[] = [];
     private coreService = inject(CoreService);
     private timerService = inject(TimerService);
@@ -38,7 +39,7 @@ export class TextfieldComponent {
     @HostListener("window:keydown", ["$event"])
     setCursor(event: KeyboardEvent): void {
         if (this.step === 0) {
-            this.timerService.startTimer();
+            this.timerService.startTimer(this.selectedModeIndex() === 0);
         }
         if (this.step >= this.selectedPassage().length - 1) {
             this.timerService.stopTimer();
@@ -61,7 +62,18 @@ export class TextfieldComponent {
                 this.wordCount++;
             }
             this.startIndex = this.currentIndex() + 1;
-            this.coreService.caculateWPM(this.wordCount, this.timerService.minute() * 60 + this.timerService.second());
+            
+            let elapsedTime: number;
+            if (this.selectedModeIndex() === 0) {
+                // Countdown mode (Time): 60 seconds - remaining time
+                const remainingTime = this.timerService.minute() * 60 + this.timerService.second();
+                elapsedTime = 60 - remainingTime;
+            } else {
+                // Count up mode (Passage): current time reading
+                elapsedTime = this.timerService.minute() * 60 + this.timerService.second();
+            }
+            
+            this.coreService.caculateWPM(this.wordCount, elapsedTime);
         }
         this.validateCharacter(event.key);
         this.step++;
