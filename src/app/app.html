@@ -1,11 +1,22 @@
 <main class="main">
+  <!-- <div>
+    <app-menubar [(selectedDifficultyIndex)]="selectedDifficultyIndex" [(selectedModeIndex)]="selectedModeIndex" />
+  </div>
+  <div>
+    <app-textfield [selectedPassage]="selectedPassage()" [selectedModeIndex]="selectedModeIndex()" />
+  </div> -->
+  @if(testEnded()) {
+  <app-result [pageSelected]="resultPage()" />
+
+  }
+  @else {
   <div>
     <app-menubar [(selectedDifficultyIndex)]="selectedDifficultyIndex" [(selectedModeIndex)]="selectedModeIndex" />
   </div>
   <div>
     <app-textfield [selectedPassage]="selectedPassage()" [selectedModeIndex]="selectedModeIndex()" />
   </div>
-
+  }
 </main>
 
 
