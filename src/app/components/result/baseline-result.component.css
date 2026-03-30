@@ -1,0 +1,25 @@
+@keyframes glowPulse {
+
+    0%,
+    100% {
+        filter: drop-shadow(0 0 5px #10b981) drop-shadow(0 0 10px #059669);
+        opacity: 1;
+    }
+
+    50% {
+        filter: drop-shadow(0 0 15px #10b981) drop-shadow(0 0 25px #059669) drop-shadow(0 0 35px #10b98180);
+        opacity: 1;
+    }
+}
+
+.glow-animation {
+    animation: glowPulse 2s ease-in-out infinite;
+    filter: brightness(1.1);
+}
+
+.result-container {
+    background-image: url('/assets/images/pattern-star-1.svg'), url('/assets/images/pattern-star-2.svg');
+    background-repeat: no-repeat, no-repeat;
+    background-position-x: right, left;
+    background-position-y: bottom, top;
+}

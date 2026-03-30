@@ -1,0 +1,14 @@
+<div
+    class="flex justify-evenly  py-10 px-50 *:border *:rounded-lg *:border-neutral-800 *:text-neutral-400 *:w-1/6 *:p-3 [&_p]:font-bold">
+    <span>
+        WPM: <p class="text-white">{{coreService.wpm()}}</p>
+    </span>
+    <span>
+        Accuracy: <p [class.text-red-500]="coreService.accuracy() < 100">{{coreService.accuracy()}}%</p>
+    </span>
+    <span class="*:inline">
+        Characters: <p class="text-green-500">{{coreService.correctChars}}</p> / <p class="text-red-500">
+            {{coreService.incorrectChars}}
+        </p>
+    </span>
+</div>

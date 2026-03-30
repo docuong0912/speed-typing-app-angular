@@ -1,0 +1,14 @@
+<div class="result-container">
+    @if(pageSelected === 1) {
+
+    <app-baseline-result />
+
+
+    }
+    @else if(pageSelected === 2) {
+    <app-high-score-result />
+
+    }
+    @else {
+    <app-test-complete-result />}
+</div>
