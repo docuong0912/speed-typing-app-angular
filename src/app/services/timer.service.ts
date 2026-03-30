@@ -5,8 +5,12 @@ export class TimerService {
     private timerId: number | null = null;
     private _second = signal(0);
     private _minute = signal(0);
+    private _isEneded = signal(false);
     readonly second = this._second.asReadonly();
     readonly minute = this._minute.asReadonly();
+    readonly isEnded = this._isEneded.asReadonly();
+
+
     initiateTimer(countdown: boolean): void {
         this.stopTimer();
         if (countdown) {
@@ -47,6 +51,7 @@ export class TimerService {
 
         if (m === 0 && s === 0) {
             this.stopTimer();
+            this._isEneded.set(true);
             return;
         }
 
@@ -68,9 +73,11 @@ export class TimerService {
     hasStarted(): boolean {
         return this.timerId !== null;
     }
+
     resetTimer(): void {
         this.stopTimer();
         this._second.set(0);
         this._minute.set(0);
     }
 }
+
