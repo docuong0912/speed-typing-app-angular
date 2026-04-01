@@ -11,4 +11,13 @@
     }
     @else {
     <app-test-complete-result />}
+    <div class="flex justify-center w-full ">
+        <button (click)="handleRetry()"
+            class="bg-white rounded-lg w-40 h-10 text-neutral-800 text-sm font-medium flex items-center justify-center gap-2 mt-4 hover:bg-neutral-200 transition-colors duration-300">
+            @if(pageSelected
+            < 3) { Beat this score } @else { Go Again } <img src="/assets/images/icon-restart.svg" alt="retry icon"
+                class="text-neutral-800" />
+        </button>
+    </div>
+
 </div>

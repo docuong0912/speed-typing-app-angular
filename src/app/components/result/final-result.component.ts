@@ -1,6 +1,7 @@
 import { CommonModule } from "@angular/common";
-import { Component, signal, AfterViewInit, Input } from "@angular/core";
+import { Component, signal, AfterViewInit, Input, inject } from "@angular/core";
 import { ResultsComponent } from "../common/result/results.component";
+import { CoreService } from "../../services/core.service";
 
 @Component({
     selector: "app-baseline-result",
@@ -68,6 +69,11 @@ export class TestCompleteResult {
     background-position-y: bottom, top;}`]
 })
 export class FinalResult {
+    coreService = inject(CoreService);
     @Input()
     pageSelected = 0;
+    handleRetry(): void {
+        this.coreService.resetState();
+        this.pageSelected = 0;
+    }
 }
